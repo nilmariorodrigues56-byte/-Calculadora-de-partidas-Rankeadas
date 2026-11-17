@@ -1,0 +1,71 @@
+// ============================================================
+// 2️⃣ Calculadora de Partidas Rankeadas
+// Desafio de Projeto - DIO
+//
+// Conceitos utilizados:
+// - Variáveis, Operadores, Laços de repetição,
+//   Estruturas de decisão (if/else) e Funções
+// ============================================================
+
+/**
+ * Recebe a quantidade de vitórias e derrotas de um jogador,
+ * calcula o saldo de rankeadas e determina o nível (elo).
+ *
+ * @param {number} vitorias - Quantidade de vitórias
+ * @param {number} derrotas - Quantidade de derrotas
+ * @returns {{saldoVitorias: number, nivel: string}} Saldo e nível do herói
+ */
+function calcularRankeadas(vitorias, derrotas) {
+  // Saldo de rankeadas = vitórias - derrotas
+  const saldoVitorias = vitorias - derrotas;
+
+  // O nível é definido pela QUANTIDADE DE VITÓRIAS
+  let nivel;
+
+  if (vitorias < 10) {
+    nivel = "Ferro";
+  } else if (vitorias <= 20) {
+    nivel = "Bronze";
+  } else if (vitorias <= 50) {
+    nivel = "Prata";
+  } else if (vitorias <= 80) {
+    nivel = "Ouro";
+  } else if (vitorias <= 90) {
+    nivel = "Diamante";
+  } else if (vitorias <= 100) {
+    nivel = "Lendário";
+  } else {
+    nivel = "Imortal";
+  }
+
+  return { saldoVitorias, nivel };
+}
+
+/**
+ * Exibe a mensagem padrão exigida pelo desafio.
+ * @param {number} vitorias
+ * @param {number} derrotas
+ */
+function exibirResultado(vitorias, derrotas) {
+  const { saldoVitorias, nivel } = calcularRankeadas(vitorias, derrotas);
+  console.log(`O Herói tem de saldo de ${saldoVitorias} está no nível de ${nivel}`);
+}
+
+// ------------------------------------------------------------
+// Testes: um laço de repetição percorre vários exemplos
+// (vitórias, derrotas) cobrindo cada faixa de nível
+// ------------------------------------------------------------
+const exemplos = [
+  [8, 2],    // 8 vitórias  -> Ferro
+  [10, 4],   // 10 vitórias -> Bronze (faixa de 11 a 20, veja a observação no README)
+  [15, 5],   // 15 vitórias -> Bronze
+  [30, 10],  // 30 vitórias -> Prata
+  [60, 20],  // 60 vitórias -> Ouro
+  [85, 15],  // 85 vitórias -> Diamante
+  [95, 8],   // 95 vitórias -> Lendário
+  [120, 30], // 120 vitórias -> Imortal
+];
+
+for (const [vitorias, derrotas] of exemplos) {
+  exibirResultado(vitorias, derrotas);
+}
